@@ -12,6 +12,8 @@ import EditPost from "./Pages/Post/Edit";
 import Edit from "./Pages/Profile/Edit";
 import ChangePassword from "./Pages/Profile/ChangePassword";
 import Layout from "./components/Layout";
+import Register from "./Pages/auth/Register";
+import Login from "./Pages/auth/Login";
 
 function App() {
   return (
@@ -29,9 +31,13 @@ function App() {
 
             <Route path="/post/edit" element={<EditPost />} />
 
-            <Route path="/subcategory/add" element={<AddPost />} />
+            <Route path="/post/add" element={<AddPost />} />
 
             <Route path="/profile/edit" element={<Edit />} />
+
+            <Route path="/register" element={<Register />} />
+
+            <Route path="/login" element={<Login />} />
 
             <Route
               path="/profile/change-password"

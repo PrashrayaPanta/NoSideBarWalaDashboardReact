@@ -1,19 +1,16 @@
-const TextFieldWithLabel = ({
-  type = "text",
+const TextAreaWithLabel = ({
   label,
   isCompulsory,
 }: {
-  type?: string;
   label: string;
-  isCompulsory?: string;
+  isCompulsory: string;
 }) => {
   return (
     <>
       <div className="flex  flex-col">
         {/* Label with Mandatory Icon */}
         <div className="flex">
-          <label htmlFor="categoryName">{label}</label>
-
+          <label htmlFor="">{label}</label>
           {isCompulsory === "Compulsory" && (
             <svg
               stroke="currentColor"
@@ -34,14 +31,16 @@ const TextFieldWithLabel = ({
           )}
         </div>
 
-        <input
-          type={type}
-          id="categoryName"
-          className="w-full h-8 border-1 focus:outline-none focus:border-amber-300 px-2 rounded-sm"
-        />
+        <textarea
+          name="message"
+          rows={4}
+          cols={50}
+          placeholder="Enter your message"
+          className="w-full border-1 focus:outline-none focus:border-amber-300 px-2 rounded-sm"
+        ></textarea>
       </div>
     </>
   );
 };
 
-export default TextFieldWithLabel;
+export default TextAreaWithLabel;

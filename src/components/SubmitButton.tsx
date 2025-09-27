@@ -1,12 +1,18 @@
+import { useLocation } from "react-router-dom";
+
 const SubmitButton = ({
   label,
   svgIcon,
-  color,
+  color = "bg-black",
+  type,
 }: {
-  label: string;
+  label?: string;
   svgIcon: React.ReactElement<React.SVGProps<SVGSVGElement>>;
-  color: string;
+  color?: string;
+  type?: string;
 }) => {
+  const { pathname } = useLocation();
+
   // Add Button Vanni ma h-min hunu paryo aarru same
 
   // Edit and Delete ma same
@@ -16,12 +22,11 @@ const SubmitButton = ({
   return (
     <>
       <a
-        href={`/category/${label.toLowerCase()}`}
-        className={`${color} text-white px-4 py-2 rounded-sm ${
-          label === "Add" ? "h-min" : null
-        }  ${
-          label === "Submit" ? "w-max" : null
-        }  flex items-center hover:cursor-pointer  gap-2`}
+        href={`http://localhost:5173${pathname}/${label?.toLowerCase()}`}
+        className={`${color} ${type === "small-width" && "w-max"}  ${
+          type === "min-height-content" && "h-min"
+        }
+        } text-white px-4 py-2 rounded-sm   flex items-center justify-center  hover:cursor-pointer  gap-2`}
       >
         {svgIcon}
         {label}

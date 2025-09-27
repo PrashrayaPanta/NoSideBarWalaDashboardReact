@@ -1,51 +1,51 @@
-import TextFieldWithLabel from "../../components/TextFieldWithLabel";
-import SubmitButton from "../../components/SubmitButton";
+import Form from "../../components/Form";
+const EditUIInformation: EditUIFields[] = [
+  {
+    label: "Username",
+    type: "text",
+    isCompulsory: "Compulsory",
+  },
+
+  {
+    label: "Email",
+    type: "text",
+    isCompulsory: "Compulsory",
+  },
+];
+
+export interface EditUIFields {
+  label: string;
+  type: string;
+  isCompulsory?: string;
+}
+
+// Button Information
+const { label, type, btnSvgIcon, color } = {
+  label: "Edit",
+  type: "small-width",
+  btnSvgIcon: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 576 512"
+      className="fill-white w-5"
+    >
+      <path d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z" />
+    </svg>
+  ),
+  color: "bg-black",
+};
 
 const Edit = () => {
   return (
     <>
-      {/* <!-- Category Form --> */}
-      <div className="shadow-2xl rounded-sm py-4 mx-4 px-4 mt-2">
-        <h1 className="font-bold md:text-4xl text-sm">
-          Profile Edit Username, email{" "}
-        </h1>
-        <form action="" className="space-y-5">
-          {/* <!-- First Input Field --> */}
-
-          {/* <div className="grid gap-2">
-            <label htmlFor="">Name</label>
-            <input
-              type="text"
-              className="w-full border-1 focus:outline-none focus:border-amber-300 h-8 px-2"
-            />
-          </div> */}
-
-          <TextFieldWithLabel type="text" label="Old password" />
-
-          <TextFieldWithLabel type="text" label="New Password" />
-
-          {/* <!-- Edit Hyper Link --> */}
-          {/* <a className="bg-black px-4 py-2 flex items-center text-white hover:cursor-pointer rounded-sm gap-2 w-max">
-            Edit
-          </a> */}
-
-          <SubmitButton
-            label="Submit"
-            svgIcon={
-              <svg
-                width="23"
-                height="30"
-                viewBox="0 0 23 30"
-                fill="white"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M16.076 4.87514L19.6778 10.1603C19.8295 10.3829 19.8295 10.7462 19.6778 10.9689L10.9569 23.7658L7.25139 24.3693C6.75625 24.4513 6.33698 23.8361 6.39288 23.1095L6.80417 17.672L15.525 4.87514C15.6767 4.65248 15.9243 4.65248 16.076 4.87514ZM22.5448 3.53334L20.5962 0.673965C19.9892 -0.21666 19.003 -0.21666 18.392 0.673965L16.9785 2.74818C16.8267 2.97084 16.8267 3.33412 16.9785 3.55678L20.5802 8.84193C20.7319 9.06459 20.9795 9.06459 21.1313 8.84193L22.5448 6.76772C23.1517 5.87123 23.1517 4.42397 22.5448 3.53334ZM15.3333 20.2853V26.2501H2.55556V7.50014H11.7316C11.8594 7.50014 11.9792 7.42397 12.071 7.29506L13.6682 4.95131C13.9717 4.506 13.7561 3.75014 13.3288 3.75014H1.91667C0.858507 3.75014 0 5.0099 0 6.56264V27.1876C0 28.7404 0.858507 30.0001 1.91667 30.0001H15.9722C17.0304 30.0001 17.8889 28.7404 17.8889 27.1876V17.9415C17.8889 17.3146 17.3738 17.004 17.0703 17.4435L15.4731 19.7872C15.3852 19.922 15.3333 20.0978 15.3333 20.2853Z" />
-              </svg>
-            }
-            color="bg-black"
-          />
-        </form>
-      </div>
+      <Form
+        title="Edit Profile"
+        UIArray={EditUIInformation}
+        btnSvgIcon={btnSvgIcon}
+        btnLabel={label}
+        btnType={type}
+        color={color}
+      />
     </>
   );
 };
