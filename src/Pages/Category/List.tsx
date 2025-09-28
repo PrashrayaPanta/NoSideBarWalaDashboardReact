@@ -1,4 +1,5 @@
-import SubmitButton from "../../components/SubmitButton";
+import NavigationButton from "../../components/NavigationButton";
+
 import Table from "../../components/Table";
 import Title from "../../components/Title";
 
@@ -11,13 +12,7 @@ const ListCategory = () => {
         <div className="flex justify-between py-4 flex-wrap lg:flex-nowrap">
           <Title text="Category List" />
 
-          {/* <h1 className="font-bold md:text-4xl text-lg">Category List</h1> */}
-
-          {/* <!-- h-min unique for it --> */}
-
-          {/* <!-- Add Hyper Link --> */}
-
-          <SubmitButton
+          <NavigationButton
             label="Add"
             svgIcon={
               <svg
@@ -32,7 +27,14 @@ const ListCategory = () => {
               </svg>
             }
             color="bg-black"
+            type="min-height-content"
           />
+
+          {/* <h1 className="font-bold md:text-4xl text-lg">Category List</h1> */}
+
+          {/* <!-- h-min unique for it --> */}
+
+          {/* <!-- Add Hyper Link --> */}
 
           {/* <a
             href="/category/add"

@@ -1,6 +1,7 @@
+import { useLayoutEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-const SubmitButton = ({
+const NavigationButton = ({
   label,
   svgIcon,
   color = "bg-black",
@@ -17,21 +18,21 @@ const SubmitButton = ({
 
   // Edit and Delete ma same
 
-  // Form Ko Button ma w-max ra mt-5
-
+  // Form Ko Button ma w-max ra mt-5) => {
   return (
     <>
-      <button
+      <a
+        href={`http://localhost:5173${pathname}/${label?.toLowerCase()}`}
         className={`${color} ${type === "small-width" && "w-max"}  ${
           type === "min-height-content" && "h-min"
         }
-        } text-white px-4 py-2 rounded-sm   flex items-center justify-center  hover:cursor-pointer  gap-2`}
+  } text-white px-4 py-2 rounded-sm   flex items-center justify-center  hover:cursor-pointer  gap-2`}
       >
         {svgIcon}
         {label}
-      </button>
+      </a>
     </>
   );
 };
 
-export default SubmitButton;
+export default NavigationButton;

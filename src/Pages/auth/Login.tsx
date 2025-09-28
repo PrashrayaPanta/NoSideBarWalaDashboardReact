@@ -1,16 +1,22 @@
+import { useFormik } from "formik";
+
+import type { FormikProps } from "formik";
 import Form from "../../components/Form";
+import * as Yup from "yup";
 
 const loginUIArray: LoginUI[] = [
   {
     label: "Email",
     type: "text",
     isCompulsory: "Compulsory",
+    name: "email",
   },
 
   {
     label: "Password",
     type: "password",
     isCompulsory: "Compulsory",
+    name: "password",
   },
 ];
 
@@ -18,6 +24,12 @@ export interface LoginUI {
   label: string;
   type: string;
   isCompulsory?: string;
+  name?: string;
+}
+
+export interface LoginFormValues {
+  email: string;
+  password: string;
 }
 
 const { type, label, btnSvgIcon, color } = {
@@ -35,15 +47,35 @@ const { type, label, btnSvgIcon, color } = {
   color: "bg-black",
 };
 
+const LoginValidationSchema = Yup.object({
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+});
+
 const Login = () => {
+  const formik: FormikProps<LoginFormValues> = useFormik<LoginFormValues>({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: LoginValidationSchema,
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+
   return (
     <>
       {/* <!-- Login Form --> */}
-
       <Form
         type="HorizontalFormCenter"
         title="Login"
-        UIArray={loginUIArray}
+        formik={formik}
+        UITextArray={loginUIArray}
         btnLabel={label}
         btnType={type}
         btnSvgIcon={btnSvgIcon}

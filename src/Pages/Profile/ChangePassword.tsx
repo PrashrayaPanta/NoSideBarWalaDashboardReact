@@ -5,7 +5,6 @@ const ChangePasswordUIInformation: ChangePasswordFields[] = [
     type: "text",
     isCompulsory: "Compulsory",
   },
-
   {
     label: "New password",
     type: "text",
@@ -38,10 +37,10 @@ const { label, type, btnSvgIcon, color } = {
 const ChangePassword = () => {
   return (
     <>
-      {/* <!-- Category Form --> */}
+      {/* <!-- Chane Password Form --> */}
       <Form
         title="Change Password"
-        UIArray={ChangePasswordUIInformation}
+        UITextArray={ChangePasswordUIInformation}
         btnSvgIcon={btnSvgIcon}
         btnLabel={label}
         btnType={type}

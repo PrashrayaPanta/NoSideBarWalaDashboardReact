@@ -1,6 +1,6 @@
 import Form from "../../components/Form";
 
-const PostUiArray: PostFields[] = [
+const PostUIArrayInformation: PostFieldsUIType[] = [
   {
     label: "Title",
     type: "text",
@@ -8,19 +8,19 @@ const PostUiArray: PostFields[] = [
   },
 ];
 
-const categoryUITextarea: categoryUITextareaField[] = [
+const postUITextarea: postUITextareaField[] = [
   {
     label: "Description dsjihjikkjbjk",
     isCompulsory: "Compulsory",
   },
 ];
 
-export interface categoryUITextareaField {
+export interface postUITextareaField {
   label: string;
   isCompulsory: string;
 }
 
-export interface PostFields {
+export interface PostFieldsUIType {
   label: string;
   type: string;
   isCompulsory?: string;
@@ -49,9 +49,9 @@ const PostEdit = () => {
 
       <Form
         title="Post Edit"
-        UIArray={PostUiArray}
+        UITextArray={PostUIArrayInformation}
         btnSvgIcon={btnSvgIcon}
-        UITextAreaArray={categoryUITextarea}
+        UITextAreaArray={postUITextarea}
         btnLabel={label}
         btnType={type}
         color={color}

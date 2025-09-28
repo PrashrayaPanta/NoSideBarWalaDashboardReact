@@ -1,29 +1,42 @@
+import { useFormik } from "formik";
+import type { FormikProps } from "formik";
 import Form from "../../components/Form";
+import * as Yup from "yup";
 
-const UITextareaInformation: UITextareaField[] = [
+const PostUITextareaInformation: PostUITextareaFieldType[] = [
   {
-    label: "Description dsjihjikkjbjk",
+    label: "Description",
     isCompulsory: "Compulsory",
+    name: "description",
   },
 ];
 
-export interface UITextareaField {
+export interface PostUITextareaFieldType {
   label: string;
   isCompulsory: string;
+  name: string;
 }
 
-const PostUIInformation: PostFields[] = [
+const PostUITextInformation: PostFieldsType[] = [
   {
     label: "Title",
     type: "text",
     isCompulsory: "Compulsory",
+    name: "title",
   },
 ];
 
-export interface PostFields {
+export interface PostFieldsType {
   label: string;
   type: string;
   isCompulsory?: string;
+  name: string;
+}
+
+export interface PostFormValues {
+  title: string;
+  description: string;
+  images: [];
 }
 
 // File Upload Array
@@ -39,6 +52,11 @@ export interface FileUploadtype {
   label: string;
   isCompulsory: string;
 }
+
+const postAddValidationSchema = Yup.object({
+  title: Yup.string().required("title is required"),
+  description: Yup.string().required("descrioption is reequired"),
+});
 
 // Button Information
 const { label, type, btnSvgIcon, color } = {
@@ -57,14 +75,26 @@ const { label, type, btnSvgIcon, color } = {
 };
 
 const PostAdd = () => {
+  const formik: FormikProps<PostFormValues> = useFormik<PostFormValues>({
+    initialValues: {
+      title: "",
+      description: "",
+      images: [],
+    },
+    validationSchema: postAddValidationSchema,
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
   return (
     <>
       {/* <!-- Category Form --> */}
       <Form
         title="Add Post"
-        UITextAreaArray={UITextareaInformation}
+        formik={formik}
+        UITextAreaArray={PostUITextareaInformation}
         fileUploadUIInformation={FileUploadUIArrayInformation}
-        UIArray={PostUIInformation}
+        UITextArray={PostUITextInformation}
         btnSvgIcon={btnSvgIcon}
         btnLabel={label}
         btnType={type}

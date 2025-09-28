@@ -1,29 +1,29 @@
+import { useFormik } from "formik";
 import Form from "../../components/Form";
+import * as Yup from "yup";
+import type { FormikProps } from "formik";
 
-const CategoryUIArray: CategoryEachField[] = [
+const CategoryUITextArray: CategoryEachFieldType[] = [
   {
     label: "Category Name",
     isCompulsory: "Compulsory",
     type: "text",
+    name: "name",
   },
 ];
 
-const categoryUITextarea: categoryUITextareaField[] = [
-  {
-    label: "Description dsjihjikkjbjk",
-    isCompulsory: "Compulsory",
-  },
-];
+const categoryUITextarea: categoryUITextareaField[] = [];
 
 export interface categoryUITextareaField {
   label: string;
   isCompulsory: string;
 }
 
-export interface CategoryEachField {
+export interface CategoryEachFieldType {
   label: string;
   isCompulsory: string;
   type: string;
+  name: string;
 }
 
 // Button
@@ -42,7 +42,26 @@ const { label, type, btnSvgIcon, color } = {
   color: "bg-black",
 };
 
+export interface categoryFormValues {
+  name: string;
+}
+
+export const categoryAddValidationSchema = Yup.object({
+  name: Yup.string().required("name is required"),
+});
+
 const CategoryAdd = () => {
+  const formik: FormikProps<categoryFormValues> = useFormik<categoryFormValues>(
+    {
+      initialValues: {
+        name: "",
+      },
+      validationSchema: categoryAddValidationSchema,
+      onSubmit: (values) => {
+        console.log(values);
+      },
+    }
+  );
   return (
     <>
       {/* <!-- Category Form --> */}
@@ -50,7 +69,9 @@ const CategoryAdd = () => {
       {/* <Title text="Category Form" /> */}
       <Form
         title="Category Add Form"
-        UIArray={CategoryUIArray}
+        formik={formik}
+        UITextArray={CategoryUITextArray}
+        UITextAreaArray={categoryUITextarea}
         btnLabel={label}
         btnType={type}
         btnSvgIcon={btnSvgIcon}

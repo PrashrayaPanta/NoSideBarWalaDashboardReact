@@ -1,9 +1,19 @@
-import type { CategoryEachField } from "../Pages/Category/Add";
-import type { FileUploadtype, PostFields } from "../Pages/Post/Add";
+import type { FormikProps } from "formik";
+import type {
+  CategoryEachFieldType,
+  categoryFormValues,
+} from "../Pages/Category/Add";
+import type {
+  FileUploadtype,
+  PostFieldsType,
+  PostFormValues,
+  PostUITextareaFieldType,
+} from "../Pages/Post/Add";
 import type { LoginUI } from "../Pages/auth/Login";
-
 import type { categoryUITextareaField } from "../Pages/Category/Add";
-import type { RegisterUI } from "../Pages/auth/Register";
+import type { RegisterFormValues, RegisterUI } from "../Pages/auth/Register";
+
+import type { LoginFormValues } from "../Pages/auth/Login";
 import SubmitButton from "./SubmitButton";
 import TextFieldWithLabel from "./TextFieldWithLabel";
 import TextAreaWithLabel from "./TextAreaWithLabel";
@@ -12,28 +22,40 @@ import FileUploadField from "./FileUploadField";
 const Form = ({
   type,
   title,
-  UIArray,
+  UITextArray,
   btnLabel,
   btnType,
   btnSvgIcon,
   color,
   UITextAreaArray,
+  formik,
   fileUploadUIInformation,
 }: {
   type?: string;
   title: string;
-  UIArray?: CategoryEachField[] | LoginUI[] | RegisterUI[] | PostFields[];
-  UITextAreaArray?: categoryUITextareaField[];
+  UITextArray?:
+    | CategoryEachFieldType[]
+    | LoginUI[]
+    | RegisterUI[]
+    | PostFieldsType[];
+  UITextAreaArray?: categoryUITextareaField[] | PostUITextareaFieldType[];
   btnLabel?: string;
+  formik:
+    | FormikProps<LoginFormValues>
+    | FormikProps<RegisterFormValues>
+    | FormikProps<categoryFormValues>
+    | FormikProps<PostFormValues>;
   btnType?: string;
   btnSvgIcon: React.ReactElement<React.SVGProps<SVGSVGElement>>;
   color?: string;
   fileUploadUIInformation?: FileUploadtype[];
 }) => {
+  console.log("I am isnide the form");
+
   return (
     <>
       <form
-        action=""
+        onSubmit={formik?.handleSubmit}
         className={`space-y-5 shadow-2xl rounded-sm py-4 mx-4 px-4 mt-2 ${
           type === "HorizontalFormCenter" && "px-2 mx-auto max-w-sm"
         } `}
@@ -56,21 +78,29 @@ const Form = ({
           {title}
         </h1>
 
-        {UIArray?.map(
+        {UITextArray?.map(
           ({
             label,
             isCompulsory,
             type,
+            name,
           }: {
             label: string;
             isCompulsory?: string;
             type: string;
+            name?: string;
           }) => (
-            <TextFieldWithLabel
-              label={label}
-              isCompulsory={isCompulsory}
-              type={type}
-            />
+            <>
+              {console.log("I am inside the map method of uitextarray")}
+              {console.log(name)}
+              <TextFieldWithLabel
+                label={label}
+                isCompulsory={isCompulsory}
+                type={type}
+                formik={formik}
+                name={name}
+              />
+            </>
           )
         )}
 
@@ -103,9 +133,21 @@ const Form = ({
             Submit
           </a> */}
 
-        {UITextAreaArray?.map(({ label, isCompulsory }) => (
-          <TextAreaWithLabel label={label} isCompulsory={isCompulsory} />
-        ))}
+        {UITextAreaArray?.map(
+          ({
+            label,
+            isCompulsory,
+          }: {
+            label: string;
+            isCompulsory: string;
+          }) => (
+            <TextAreaWithLabel
+              key={label}
+              label={label}
+              isCompulsory={isCompulsory}
+            />
+          )
+        )}
 
         {fileUploadUIInformation?.map(({ label, isCompulsory }) => (
           <FileUploadField label={label} isCompulsory={isCompulsory} />

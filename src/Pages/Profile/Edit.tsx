@@ -1,11 +1,10 @@
 import Form from "../../components/Form";
-const EditUIInformation: EditUIFields[] = [
+const EditUITextInformation: EditUITextFields[] = [
   {
     label: "Username",
     type: "text",
     isCompulsory: "Compulsory",
   },
-
   {
     label: "Email",
     type: "text",
@@ -13,7 +12,7 @@ const EditUIInformation: EditUIFields[] = [
   },
 ];
 
-export interface EditUIFields {
+export interface EditUITextFields {
   label: string;
   type: string;
   isCompulsory?: string;
@@ -38,9 +37,10 @@ const { label, type, btnSvgIcon, color } = {
 const Edit = () => {
   return (
     <>
+      {/* Edit Profile */}
       <Form
         title="Edit Profile"
-        UIArray={EditUIInformation}
+        UITextArray={EditUITextInformation}
         btnSvgIcon={btnSvgIcon}
         btnLabel={label}
         btnType={type}

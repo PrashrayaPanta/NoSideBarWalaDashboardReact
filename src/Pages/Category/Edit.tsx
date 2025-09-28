@@ -1,10 +1,21 @@
 import Form from "../../components/Form";
+import type { categoryFormValues } from "./Add";
+
+import { useFormik } from "formik";
+
+import * as Yup from "yup";
+import type { FormikProps } from "formik";
+
+export const categoryAddValidationSchema = Yup.object({
+  name: Yup.string().required("name is required"),
+});
 
 const CategoryUIArray = [
   {
     label: "Category Name",
     isCompulsory: "Compulsory",
     type: "text",
+    name: "name",
   },
 ];
 
@@ -24,6 +35,17 @@ const { label, type, btnSvgIcon, color } = {
 };
 
 const CategoryEdit = () => {
+  const formik: FormikProps<categoryFormValues> = useFormik<categoryFormValues>(
+    {
+      initialValues: {
+        name: "",
+      },
+      validationSchema: categoryAddValidationSchema,
+      onSubmit: (values) => {
+        console.log(values);
+      },
+    }
+  );
   return (
     <>
       {/* Main Content */}
@@ -33,7 +55,8 @@ const CategoryEdit = () => {
       {/* <Title text="Category Edit" /> */}
       <Form
         title="Category Edit"
-        UIArray={CategoryUIArray}
+        formik={formik}
+        UITextArray={CategoryUIArray}
         btnType={type}
         btnLabel={label}
         btnSvgIcon={btnSvgIcon}
