@@ -2,22 +2,9 @@ import { useFormik } from "formik";
 import type { FormikProps } from "formik";
 import Form from "../../components/Form";
 import * as Yup from "yup";
+import type { FieldType } from "../../interfaces/FieldType";
 
-const PostUITextareaInformation: PostUITextareaFieldType[] = [
-  {
-    label: "Description",
-    isCompulsory: "Compulsory",
-    name: "description",
-  },
-];
-
-export interface PostUITextareaFieldType {
-  label: string;
-  isCompulsory: string;
-  name: string;
-}
-
-const PostUITextInformation: PostFieldsType[] = [
+const PostUITextInformation: FieldType[] = [
   {
     label: "Title",
     type: "text",
@@ -26,12 +13,18 @@ const PostUITextInformation: PostFieldsType[] = [
   },
 ];
 
-export interface PostFieldsType {
-  label: string;
-  type: string;
-  isCompulsory?: string;
-  name: string;
-}
+const PostUITextareaInformation: FieldType[] = [
+  {
+    label: "Description",
+    isCompulsory: "Compulsory",
+    name: "description",
+  },
+  {
+    label: "Description",
+    isCompulsory: "Compulsory",
+    name: "description",
+  },
+];
 
 export interface PostFormValues {
   title: string;
@@ -40,22 +33,21 @@ export interface PostFormValues {
 }
 
 // File Upload Array
-
-const FileUploadUIArrayInformation: FileUploadtype[] = [
+const FileUploadUIArrayInformation: FieldType[] = [
   {
     label: "Images",
-    isCompulsory: "Compulsory",
+    name: "images",
+  },
+  {
+    label: "Images",
+    name: "images123",
   },
 ];
 
-export interface FileUploadtype {
-  label: string;
-  isCompulsory: string;
-}
-
 const postAddValidationSchema = Yup.object({
   title: Yup.string().required("title is required"),
-  description: Yup.string().required("descrioption is reequired"),
+  description: Yup.string().required("description is reequired"),
+  images: Yup.mixed().required("Image is required"),
 });
 
 // Button Information
@@ -75,7 +67,7 @@ const { label, type, btnSvgIcon, color } = {
 };
 
 const PostAdd = () => {
-  const formik: FormikProps<PostFormValues> = useFormik<PostFormValues>({
+  const formik = useFormik<PostFormValues>({
     initialValues: {
       title: "",
       description: "",
@@ -89,6 +81,7 @@ const PostAdd = () => {
   return (
     <>
       {/* <!-- Category Form --> */}
+      {console.log(formik)}
       <Form
         title="Add Post"
         formik={formik}

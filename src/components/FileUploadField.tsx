@@ -1,10 +1,17 @@
 const FileUploadField = ({
   label,
   isCompulsory,
+  formik,
+  name,
 }: {
   label: string;
-  isCompulsory: string;
+  isCompulsory?: string;
+  formik: any;
+  name: string;
 }) => {
+  console.log(name);
+  console.log(formik);
+
   return (
     <div className="flex  flex-col">
       {/* Label with Mandatory Icon */}
@@ -33,6 +40,8 @@ const FileUploadField = ({
       <input
         type="file"
         className="w-full h-8 border-1 focus:outline-none focus:border-amber-300 px-2 rounded-sm"
+        onBlur={formik?.handleBlur}
+        name={name}
       />
     </div>
   );

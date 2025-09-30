@@ -1,5 +1,4 @@
 import type { FormikProps } from "formik";
-import type { LoginFormValues } from "../Pages/auth/Login";
 
 const TextFieldWithLabel = ({
   type = "text",

@@ -1,31 +1,30 @@
+import { useFormik, type FormikProps } from "formik";
 import Form from "../../components/Form";
+import * as Yup from "yup";
+import type { FieldType } from "../../interfaces/FieldType";
 
-const PostUIArrayInformation: PostFieldsUIType[] = [
+const PostUIArrayInformation: FieldType[] = [
   {
     label: "Title",
     type: "text",
     isCompulsory: "Compulsory",
+    name: "title",
   },
 ];
 
-const postUITextarea: postUITextareaField[] = [
+const postUITextarea: FieldType[] = [
   {
     label: "Description dsjihjikkjbjk",
     isCompulsory: "Compulsory",
+    name: "description",
   },
 ];
 
-export interface postUITextareaField {
-  label: string;
-  isCompulsory: string;
-}
-
-export interface PostFieldsUIType {
-  label: string;
-  type: string;
-  isCompulsory?: string;
-}
-
+const postAddValidationSchema = Yup.object({
+  title: Yup.string().required("title is required"),
+  description: Yup.string().required("descrioption is reequired"),
+  images: Yup.string().required("Images is required"),
+});
 // Button
 const { label, type, btnSvgIcon, color } = {
   label: "Edit",
@@ -42,12 +41,33 @@ const { label, type, btnSvgIcon, color } = {
   color: "bg-black",
 };
 
+export interface PostEditFormValues {
+  title: string;
+  description: string;
+  images: [];
+}
+
 const PostEdit = () => {
+  const formik: FormikProps<PostEditFormValues> = useFormik<PostEditFormValues>(
+    {
+      initialValues: {
+        title: "",
+        description: "",
+        images: [],
+      },
+      validationSchema: postAddValidationSchema,
+      onSubmit: (values) => {
+        console.log(values);
+      },
+    }
+  );
+
   return (
     <>
       {/* Main Content */}
 
       <Form
+        formik={formik}
         title="Post Edit"
         UITextArray={PostUIArrayInformation}
         btnSvgIcon={btnSvgIcon}

@@ -4,7 +4,9 @@ import type { FormikProps } from "formik";
 import Form from "../../components/Form";
 import * as Yup from "yup";
 
-const loginUIArray: LoginUI[] = [
+import type { FieldType } from "../../interfaces/FieldType";
+
+const loginUIArray: FieldType[] = [
   {
     label: "Email",
     type: "text",
@@ -19,13 +21,6 @@ const loginUIArray: LoginUI[] = [
     name: "password",
   },
 ];
-
-export interface LoginUI {
-  label: string;
-  type: string;
-  isCompulsory?: string;
-  name?: string;
-}
 
 export interface LoginFormValues {
   email: string;

@@ -2,8 +2,9 @@ import { useFormik } from "formik";
 import Form from "../../components/Form";
 import * as Yup from "yup";
 import type { FormikProps } from "formik";
+import type { FieldType } from "../../interfaces/FieldType";
 
-const CategoryUITextArray: CategoryEachFieldType[] = [
+const CategoryUITextArray: FieldType[] = [
   {
     label: "Category Name",
     isCompulsory: "Compulsory",
@@ -11,20 +12,6 @@ const CategoryUITextArray: CategoryEachFieldType[] = [
     name: "name",
   },
 ];
-
-const categoryUITextarea: categoryUITextareaField[] = [];
-
-export interface categoryUITextareaField {
-  label: string;
-  isCompulsory: string;
-}
-
-export interface CategoryEachFieldType {
-  label: string;
-  isCompulsory: string;
-  type: string;
-  name: string;
-}
 
 // Button
 const { label, type, btnSvgIcon, color } = {
@@ -71,7 +58,6 @@ const CategoryAdd = () => {
         title="Category Add Form"
         formik={formik}
         UITextArray={CategoryUITextArray}
-        UITextAreaArray={categoryUITextarea}
         btnLabel={label}
         btnType={type}
         btnSvgIcon={btnSvgIcon}
